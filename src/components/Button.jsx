@@ -1,16 +1,31 @@
 "use client";
 
+import { useEffect } from "react";
+
 export default function Button({ children, ...props }) {
+  useEffect(() => {
+    navigator.serviceWorker.register("/sw.js");
+  }, []);
+
   function notificationBtnHandler() {
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
-        const notification = new Notification("Notification", {
-          body: "You have subscribed to receive notifications.",
-          icon: "/bell.png",
+        navigator.serviceWorker.ready.then((registration) => {
+          registration.showNotification("Notification", {
+            body: "You have subscribed to receive notifications.",
+            icon: "/bell.png",
+          });
         });
+        // const notification = new Notification("Notification", {
+        //   body: "You have subscribed to receive notifications.",
+        //   icon: "/bell.png",
+        // });
+      } else {
+        alert("No permission");
       }
     });
   }
+
   return (
     <div
       className={
