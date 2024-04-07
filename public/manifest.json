@@ -9,6 +9,11 @@
       "purpose": "any maskable"
     },
     {
+      "src": "/bell-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
       "src": "/bell-512x512.png",
       "sizes": "512x512",
       "type": "image/png"

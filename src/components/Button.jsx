@@ -3,10 +3,12 @@
 import { useEffect } from "react";
 
 export default function Button({ children, ...props }) {
+  // Regsitration of navigator service worker on component mount
   useEffect(() => {
     navigator.serviceWorker.register("/sw.js");
   }, []);
 
+  // Click event handler that generates a notification on each click
   function notificationBtnHandler() {
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
@@ -16,10 +18,6 @@ export default function Button({ children, ...props }) {
             icon: "/bell.png",
           });
         });
-        // const notification = new Notification("Notification", {
-        //   body: "You have subscribed to receive notifications.",
-        //   icon: "/bell.png",
-        // });
       } else {
         alert("No permission");
       }
